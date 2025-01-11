@@ -7,10 +7,10 @@
 class AForm
 {
 	private:
-		const std::string name;
+		std::string name;
 		bool is_signed;
-		const int to_sign;
-		const int to_exec;
+		int to_sign;
+		int to_exec;
 
 	private:
 		class GradeTooHighException: public std::exception
@@ -27,15 +27,19 @@ class AForm
 	public:
 		AForm();
 		AForm(const std::string _name, const int _to_sign, const int _to_exec);
-		~AForm();
+		virtual ~AForm();
 		AForm(const AForm &src);
 		AForm &operator=(const AForm &src);
 
 	public:
 		const std::string getName();
 		bool getIsSigned();
-		const int getToSigned();
+		const int getToSign();
 		const int getToExec();
+		void setName(const std::string _name);
+		void setIsSigned();
+		void setToSign(const int _to_sign);
+		void setToExec(const int _to_exec);
 		void beSigned(Bureaucrat &bur);
 		virtual void execute(Bureaucrat const & executor) const= 0;
 };

@@ -39,7 +39,7 @@ bool AForm::getIsSigned()
 	return (this->is_signed);
 }
 
-const int AForm::getToSigned()
+const int AForm::getToSign()
 {
 	return (this->to_sign);
 }
@@ -61,14 +61,34 @@ const char *AForm::GradeTooLowException::what() const throw()
 
 std::ostream &operator<<(std::ostream &out, AForm &in)
 {
-	out << "Form's name : " << in.getName() << ", status : " << in.getIsSigned() << ", grade to sign :" << in.getToSigned() << ", grade to execute : " << in.getToExec() << ".";
+	out << "Form's name : " << in.getName() << ", status : " << in.getIsSigned() << ", grade to sign :" << in.getToSign() << ", grade to execute : " << in.getToExec() << ".";
 	return out;
 }
 
 void AForm::beSigned(Bureaucrat &bur)
 {
-	if (bur.getGrade() <= this->getToSigned())
+	if (bur.getGrade() <= this->getToSign())
 		this->is_signed = true;
 	else
 		throw(AForm::GradeTooLowException());
+}
+
+void AForm::setName(const std::string _name)
+{
+	name = _name;
+}
+
+void AForm::setIsSigned()
+{
+	is_signed = false;
+}
+
+void AForm::setToSign(int _to_sign)
+{
+	to_sign = _to_sign;
+}
+
+void AForm::setToExec(int _to_exec)
+{
+	to_exec = _to_exec;
 }
