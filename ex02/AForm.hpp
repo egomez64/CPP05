@@ -12,13 +12,18 @@ class AForm
 		int to_sign;
 		int to_exec;
 
-	private:
+	public:
 		class GradeTooHighException: public std::exception
 		{
 			public:
 				virtual const char	*what() const throw();
 		};
 		class GradeTooLowException: public std::exception
+		{
+			public:
+				virtual const char	*what() const throw();
+		};
+		class NonSignException: public std::exception
 		{
 			public:
 				virtual const char	*what() const throw();
@@ -32,10 +37,10 @@ class AForm
 		AForm &operator=(const AForm &src);
 
 	public:
-		const std::string getName();
-		bool getIsSigned();
-		const int getToSign();
-		const int getToExec();
+		const std::string getName() const;
+		bool getIsSigned() const;
+		const int getToSign() const;
+		const int getToExec() const;
 		void setName(const std::string _name);
 		void setIsSigned();
 		void setToSign(const int _to_sign);

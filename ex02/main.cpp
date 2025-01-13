@@ -1,58 +1,45 @@
 
 #include "Bureaucrat.hpp"
-#include "Form.hpp"
+#include "AForm.hpp"
+#include "ShrubberyCreationForm.hpp"
+#include "RobotomyRequestForm.hpp"
+#include "PresidentialPardonForm.hpp"
 
 int	main()
 {
-	try
 	{
-		Bureaucrat	fred("Fred", 1), bob("Bob", 150);
-		Form		form1("Form 1", 1, 1), form2(form1), form3;
+		ShrubberyCreationForm	form1("Garden");
+		PresidentialPardonForm	form2("Bob");
+		RobotomyRequestForm		form3("Bender");
+		Bureaucrat				bob("Bob", 1);
 
-		form3 = form1;
-		std::cout << form1 << std::endl;
-		std::cout << form3 << std::endl;
-		form1.beSigned(fred);
-		std::cout << form1 << std::endl;
-		std::cout << form3 << std::endl;
-		fred.signForm(form2);
-		form1.beSigned(bob);
+		bob.signForm(form1);
+		bob.signForm(form2);
+		bob.signForm(form3);
+		bob.executeForm(form1);
+		bob.executeForm(form2);
+		bob.executeForm(form3);
 	}
-	catch(const std::exception& e)
 	{
-		std::cerr << e.what() << std::endl;
-	}
-	try
-	{
-		Form	bob("Bob", 0, 0);
-	}
-	catch(const std::exception& e)
-	{
-		std::cerr << e.what() << std::endl;
-	}
-	try
-	{
-		Form	globglob("GlobGlob", 151, 151);
-		std::cout << globglob << std::endl;
-	}
-	catch(const std::exception& e)
-	{
-		std::cerr << e.what() << std::endl;
-	}
-	try
-	{
-		Bureaucrat	glabglab("Glabglab", 100);
-		Form		glabform("Glab Form", 1, 1);
+		ShrubberyCreationForm	form("Backyard");
+		Bureaucrat				fred("Fred", 1), globox("Globox", 150);
 
-		std::cout << glabglab << std::endl;
-		std::cout << glabform << std::endl;
-		glabglab.signForm(glabform);
-		glabform.beSigned(glabglab);
+		fred.executeForm(form);
+		fred.signForm(form);
+		globox.executeForm(form);
+		std::cout << form << std::endl;
+	}
+	try
+	{
+		RobotomyRequestForm	form("Baba");
+		Bureaucrat			globglob("Globglob", 1);
+		Bureaucrat			glabglab("Glabglab", 150);
+		
+		form.beSigned(globglob);
+		form.execute(glabglab);
 	}
 	catch(const std::exception& e)
 	{
 		std::cerr << e.what() << std::endl;
 	}
-	
-	
 }

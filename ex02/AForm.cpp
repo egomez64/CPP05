@@ -29,22 +29,22 @@ AForm &AForm::operator=(const AForm &src)
 AForm::~AForm()
 {}
 
-const std::string AForm::getName()
+const std::string AForm::getName() const
 {
 	return (this->name);
 }
 
-bool AForm::getIsSigned()
+bool AForm::getIsSigned() const
 {
 	return (this->is_signed);
 }
 
-const int AForm::getToSign()
+const int AForm::getToSign() const
 {
 	return (this->to_sign);
 }
 
-const int AForm::getToExec()
+const int AForm::getToExec() const
 {
 	return (this->to_exec);
 }
@@ -57,6 +57,11 @@ const char *AForm::GradeTooHighException::what() const throw()
 const char *AForm::GradeTooLowException::what() const throw()
 {
 	return ("The Form's grade was set too low");
+}
+
+const char *AForm::NonSignException::what() const throw()
+{
+	return ("The Form isn't sign yet");
 }
 
 std::ostream &operator<<(std::ostream &out, AForm &in)

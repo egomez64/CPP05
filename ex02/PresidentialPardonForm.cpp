@@ -1,28 +1,29 @@
 #include "PresidentialPardonForm.hpp"
 
-PresidentialPardonForm::PresidentialPardonForm() : AForm::AForm()
+PresidentialPardonForm::PresidentialPardonForm() : AForm::AForm("PresdentialPardonForm", 25, 5), target("Random")
+{}
+
+PresidentialPardonForm::PresidentialPardonForm(std::string _target) : AForm::AForm("PresdentialPardonForm", 25, 5), target(_target)
+{}
+
+PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm &src) : AForm::AForm("PresdentialPardonForm", 25, 5), target(src.target)
+{}
+
+PresidentialPardonForm::~PresidentialPardonForm()
+{}
+
+PresidentialPardonForm &PresidentialPardonForm::operator=(const PresidentialPardonForm &src)
 {
-	setName("PresidentialPardonForm");
-	setIsSigned();
-	setToExec(5);
-	setToSign(25);
-	target = "Random";
+	if (this != &src)
+		this->target = src.target;
+	return (*this);
 }
 
-PresidentialPardonForm::PresidentialPardonForm(std::string _target) : AForm::AForm()
+void PresidentialPardonForm::execute(const Bureaucrat &executor) const
 {
-	setName("PresidentialPardonForm");
-	setIsSigned();
-	setToExec(5);
-	setToSign(25);
-	target = _target;
-}
-
-PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm &src) : AForm::AForm(src)
-{
-	setName(getName(src.name));
-	setIsSigned();
-	setToExec(5);
-	setToSign(25);
-	target = _target;
+	if (!this->getIsSigned())
+		throw(PresidentialPardonForm::NonSignException());
+	if (executor.getGrade() > 5)
+		throw(PresidentialPardonForm::GradeTooLowException());
+	std::cout << target << " has been pardon by Zaphod Beeblebrox." << std::endl;
 }

@@ -30,6 +30,7 @@ class Bureaucrat
 		void promote();
 		void demote();
 		void signForm(AForm &_form);
+		void executeForm(const AForm &form);
 
 	public:
 		Bureaucrat();
